@@ -3,597 +3,246 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mes Finances · Suivi multi-comptes & Prévisions</title>
+<title>Tandem, l'argent du couple, enfin clair</title>
 <style>
-:root{--navy:#1F3864;--blue:#2E5496;--light:#D9E1F2;--yellow:#FFF2CC;--green:#E2EFDA;--grey:#F2F2F2;--orange:#ED7D31;--red:#C00000;--ink:#1a2233;}
-*{box-sizing:border-box;}
-body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#eef1f6;color:var(--ink);font-size:14px;}
-header{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;padding:18px 24px;}
-header h1{margin:0;font-size:22px;letter-spacing:.5px;}
-header p{margin:4px 0 0;font-size:12px;opacity:.85;}
-.wrap{max-width:1240px;margin:0 auto;padding:0 16px 60px;}
-nav{display:flex;flex-wrap:wrap;gap:4px;background:var(--navy);padding:0 16px;position:sticky;top:0;z-index:20;}
-nav button{background:transparent;color:#c7d3ea;border:none;padding:12px 14px;cursor:pointer;font-size:13px;font-weight:bold;border-bottom:3px solid transparent;}
-nav button:hover{color:#fff;}
-nav button.active{color:#fff;border-bottom-color:var(--orange);}
-.panel{display:none;padding:22px 0;}
-.panel.active{display:block;}
-h2{color:var(--navy);border-bottom:2px solid var(--light);padding-bottom:6px;margin-top:0;}
-.hint{font-size:12px;color:#7a869a;font-style:italic;margin:2px 0 14px;}
-table{border-collapse:collapse;width:100%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);}
-th{background:var(--blue);color:#fff;padding:8px 10px;font-size:12px;text-align:left;}
-td{border:1px solid #e2e6ee;padding:5px 8px;font-size:13px;}
-tr:nth-child(even) td{background:#fafbfd;}
-tfoot td{background:var(--green)!important;font-weight:bold;}
-input.cell{border:1px solid #cfd6e4;border-radius:4px;padding:5px 6px;width:100%;font-family:inherit;font-size:13px;text-align:right;background:#fff;}
-input.cell.edit{background:var(--yellow);}
-input.txt{text-align:left;}
-input.cell:focus{outline:2px solid var(--orange);border-color:var(--orange);}
-.num{text-align:right;font-variant-numeric:tabular-nums;}
-.neg{color:var(--red);}
-.pos{color:#1e7d34;}
-.btn{background:var(--blue);color:#fff;border:none;border-radius:5px;padding:7px 12px;cursor:pointer;font-size:12px;font-weight:bold;}
-.btn:hover{background:var(--navy);}
-.btn.ghost{background:#fff;color:var(--blue);border:1px solid var(--blue);}
-.btn.mini{padding:3px 8px;font-size:11px;}
-.btn.del{background:#fff;color:var(--red);border:1px solid #e0b4b4;}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0;}
-.kpi{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:14px;border-top:4px solid var(--blue);}
-.kpi .lab{font-size:11px;color:#7a869a;font-weight:bold;text-transform:uppercase;letter-spacing:.3px;}
-.kpi .v{font-size:21px;font-weight:bold;color:var(--navy);margin-top:6px;}
-.scenbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border-radius:8px;padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,.08);}
-.scenbar .seg{display:flex;border:2px solid var(--orange);border-radius:8px;overflow:hidden;}
-.scenbar .seg button{background:#fff;color:var(--orange);border:none;padding:9px 18px;cursor:pointer;font-weight:bold;font-size:13px;}
-.scenbar .seg button.on{background:var(--orange);color:#fff;}
-.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
-.card{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);padding:14px;}
-.card h3{margin:0 0 8px;font-size:14px;color:var(--navy);}
-.alert{padding:12px 16px;border-radius:8px;font-weight:bold;margin:14px 0;}
-.alert.bad{background:#fde8e8;color:var(--red);border-left:5px solid var(--red);}
-.alert.warn{background:#fff6e0;color:#8a6100;border-left:5px solid var(--orange);}
-.alert.ok{background:#e7f6ec;color:#1e7d34;border-left:5px solid #1e7d34;}
-.legend{font-size:11px;color:#7a869a;margin-top:6px;}
-.pill{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:bold;}
-select.cell{border:1px solid #cfd6e4;border-radius:4px;padding:5px;font-family:inherit;font-size:13px;width:100%;}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr);}.charts,.two{grid-template-columns:1fr;}}
-.foot{font-size:11px;color:#98a2b3;margin-top:24px;text-align:center;}
-.scrollx{overflow-x:auto;}
-.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:bold;}
-.badge.ok{background:#e7f6ec;color:#1e7d34;}
-.badge.ko{background:#fde8e8;color:var(--red);}
+:root{--ink:#16233a;--muted:#5b6b85;--teal:#0F9E9E;--teal2:#0c7d84;--coral:#FF6B6B;--cream:#FBF7F0;--card:#fff;--line:#e7ecf2;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,Helvetica,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+.btn{display:inline-block;background:var(--coral);color:#fff;border:none;border-radius:30px;padding:13px 26px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:.15s;}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.05);}
+.btn.ghost{background:#fff;color:var(--teal2);border:2px solid var(--teal);}
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+.logo{font-weight:800;font-size:22px;color:var(--teal2);letter-spacing:-.5px;}
+.logo span{color:var(--coral);}
+.hero{background:linear-gradient(160deg,#e8f7f6 0%,var(--cream) 70%);padding:26px 0 64px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;}
+.badge{display:inline-block;background:#d8f2f0;color:var(--teal2);font-weight:700;font-size:12.5px;padding:6px 13px;border-radius:20px;margin-bottom:16px;}
+h1{font-size:44px;line-height:1.12;letter-spacing:-1px;margin-bottom:16px;}
+h1 em{font-style:normal;color:var(--teal2);}
+.lead{font-size:18px;color:var(--muted);margin-bottom:24px;max-width:520px;}
+.form{display:flex;gap:8px;flex-wrap:wrap;max-width:480px;}
+.form input{flex:1;min-width:200px;border:2px solid var(--line);border-radius:30px;padding:13px 18px;font-size:15px;font-family:inherit;}
+.form input:focus{outline:none;border-color:var(--teal);}
+.trust{font-size:13px;color:var(--muted);margin-top:12px;}
+.count{font-weight:700;color:var(--teal2);}
+.mock{background:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(15,110,110,.16);padding:16px;}
+.mock h4{font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.row{display:flex;justify-content:space-between;align-items:center;padding:9px 10px;border-radius:9px;font-size:13.5px;}
+.row:nth-child(even){background:#f6faf9;}
+.chip{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;}
+.chip.w{background:#e4f0ff;color:#2456a8;}.chip.h{background:#ffe9e3;color:#c0392b;}
+.bar{height:8px;border-radius:6px;background:#eef2f6;overflow:hidden;margin-top:2px;}
+.bar>i{display:block;height:100%;background:var(--teal);}
+section{padding:60px 0;}
+.eyebrow{color:var(--coral);font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-align:center;}
+h2{font-size:32px;text-align:center;letter-spacing:-.6px;margin:6px 0 8px;}
+.sub{text-align:center;color:var(--muted);font-size:17px;max-width:620px;margin:0 auto 40px;}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;}
+.card .ic{font-size:26px;margin-bottom:10px;}
+.card h3{font-size:17px;margin-bottom:6px;}
+.card p{color:var(--muted);font-size:14.5px;}
+.pain{background:#fff;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s;}
+.step{text-align:center;}
+.step .n{width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:760px;margin:0 auto;}
+.plan{background:#fff;border:2px solid var(--line);border-radius:18px;padding:28px;}
+.plan.best{border-color:var(--teal);position:relative;}
+.plan.best::after{content:'Recommandé';position:absolute;top:-12px;right:20px;background:var(--teal);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:12px;}
+.plan .amt{font-size:34px;font-weight:800;margin:6px 0;}
+.plan .amt small{font-size:15px;color:var(--muted);font-weight:500;}
+.plan ul{list-style:none;margin:14px 0;}
+.plan li{padding:6px 0 6px 26px;position:relative;font-size:14.5px;}
+.plan li::before{content:'✓';position:absolute;left:0;color:var(--teal);font-weight:800;}
+.trustband{background:#0e2233;color:#dbe6f0;}
+.trustband .cards .card{background:#16304a;border-color:#22415f;color:#dbe6f0;}
+.trustband .card h3{color:#fff;}.trustband .card p{color:#a9bdd4;}
+.faq{max-width:760px;margin:0 auto;}
+.q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+.q h4{font-size:15.5px;margin-bottom:4px;}
+.q p{color:var(--muted);font-size:14px;}
+.cta{background:linear-gradient(135deg,var(--teal2),var(--teal));color:#fff;text-align:center;border-radius:22px;padding:48px 24px;}
+.cta h2{color:#fff;}
+.cta .form{margin:22px auto 0;justify-content:center;}
+.cta .form input{border-color:transparent;}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:34px 0;}
+.note{background:#fff7ed;border:1px solid #ffe0b8;color:#8a5a00;border-radius:12px;padding:12px 16px;font-size:13px;margin:22px auto 0;max-width:760px;}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr;}.cards,.steps{grid-template-columns:1fr;}.price{grid-template-columns:1fr;}h1{font-size:34px;}}
 </style>
 </head>
 <body>
-<header>
-  <h1>Mes Finances · Suivi multi-comptes &amp; Prévisions 36 mois</h1>
-  <p>Chaque euro suit son compte · virements · commissions vers placement · 100% hors ligne · vos données restent chez vous</p>
-</header>
-<nav id="nav"></nav>
+
 <div class="wrap">
-  <section class="panel active" data-p="dash">
-    <div class="scenbar">
-      <strong>Scénario :</strong>
-      <div class="seg" id="segScen">
-        <button data-s="prudent">Prudent</button>
-        <button data-s="realiste">Réaliste</button>
-        <button data-s="optimiste">Optimiste</button>
-      </div>
-      <span class="hint" style="margin:0">Recalcule tout instantanément.</span>
-      <label style="font-size:13px;margin-left:6px">📅 Aujourd'hui : <input type="date" id="refDateInp" class="cell" style="width:150px;display:inline-block" onchange="setRef(this.value)"></label>
-      <span style="flex:1"></span>
-      <button class="btn ghost mini" onclick="resetAll()">↺ Réinitialiser</button>
-      <button class="btn ghost mini" onclick="window.print()">🖨 Imprimer / PDF</button>
-    </div>
-    <div id="alertBox"></div>
-    <div class="kpis" id="kpis"></div>
-    <div class="card" style="margin-bottom:16px"><h3>Statut de tous les comptes (temps réel)</h3><div class="scrollx"><table id="acctStatus"></table></div></div>
-    <div class="card" style="margin-bottom:16px"><h3>Mouvements à venir ce mois-ci</h3><div id="upcoming"></div></div>
-    <div class="charts">
-      <div class="card"><h3>Solde de chaque compte (36 mois)</h3><div id="chAcc"></div></div>
-      <div class="card"><h3>Patrimoine net (36 mois)</h3><div id="chPat"></div></div>
-      <div class="card"><h3>Revenus vs Dépenses (36 mois)</h3><div id="chRD"></div></div>
-      <div class="card"><h3>Dépenses par catégorie</h3><div id="chPie"></div></div>
-    </div>
-  </section>
-
-  <section class="panel" data-p="param">
-    <h2>Paramètres des scénarios</h2>
-    <p class="hint">Hypothèses de chaque scénario. Cellules jaunes modifiables. « Épargne mensuelle programmée » = virement automatique du compte de Alex vers le placement.</p>
-    <div class="scrollx"><table id="tblParam"></table></div>
-  </section>
-
-  <section class="panel" data-p="rev">
-    <h2>Revenus mensuels</h2>
-    <p class="hint">Chaque revenu tombe sur un compte précis. Astuce : mettez la commission sur le compte « Placement » pour la router automatiquement chaque mois.</p>
-    <div class="scrollx"><table id="tblRev"></table></div>
-    <div class="toolbar"><button class="btn mini" onclick="addRev()">+ Ajouter un revenu</button></div>
-  </section>
-
-  <section class="panel" data-p="dep">
-    <h2>Dépenses récurrentes</h2>
-    <p class="hint">Chaque dépense est prélevée sur un compte (Depuis le compte) et attribuée à un responsable (Alex / Charlie / Joint).</p>
-    <div class="scrollx"><table id="tblDep"></table></div>
-    <div class="toolbar"><button class="btn mini" onclick="addDep()">+ Ajouter une dépense</button></div>
-  </section>
-
-  <section class="panel" data-p="cpt">
-    <h2>Comptes bancaires</h2>
-    <p class="hint">Types : « Courant » (trésorerie), « Épargne » (livret), « Placement » (PEL, commissions…). Les Épargne/Placement génèrent des intérêts selon le scénario.</p>
-    <div class="scrollx"><table id="tblCpt"></table></div>
-    <div class="toolbar"><button class="btn mini" onclick="addCpt()">+ Ajouter un compte</button></div>
-  </section>
-
-  <section class="panel" data-p="vir">
-    <h2>Virements récurrents (entre comptes)</h2>
-    <p class="hint">Mouvements mensuels d'un compte vers un autre. Ex. Alex → Joint 1 950 € et Charlie → Joint 600 € pour alimenter le compte joint qui paie le crédit, l'assurance habitation, l'eau et l'épargne des enfants.</p>
-    <div class="scrollx"><table id="tblVir"></table></div>
-    <div class="toolbar"><button class="btn mini" onclick="addVir()">+ Ajouter un virement</button></div>
-    <div class="card" id="reconCard" style="margin-top:18px"></div>
-  </section>
-
-  <section class="panel" data-p="pat">
-    <h2>Patrimoine net</h2>
-    <p class="hint">Actifs − Passifs. Jaune = à saisir/ajuster.</p>
-    <div class="two">
-      <div class="card"><h3>Actifs & Passifs</h3><table id="tblPat"></table></div>
-      <div class="card"><h3>Crédit maison</h3><table id="tblCredit"></table>
-        <p class="legend">La mensualité vient des dépenses de catégorie « Logement ». Le capital restant dû se réduit mois après mois.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="panel" data-p="proj">
-    <h2>Projets & dépenses à venir</h2>
-    <p class="hint">Chaque projet est payé depuis un compte précis. Si ce compte n'a pas assez, il passe en négatif (visible en rouge). Seuil : 1 = tous les scénarios · 2 = Réaliste + Optimiste · 3 = Optimiste seul.</p>
-    <div class="scrollx"><table id="tblProj"></table></div>
-    <div class="toolbar"><button class="btn mini" onclick="addProj()">+ Ajouter un projet</button></div>
-  </section>
-
-  <section class="panel" data-p="prev">
-    <h2>Prévisions mensuelles · 36 mois</h2>
-    <p class="hint">Solde de chaque compte, mois par mois, selon le scénario actif. Rouge = compte négatif.</p>
-    <div class="scrollx"><table id="tblPrev"></table></div>
-  </section>
-
-  <section class="panel" data-p="reve">
-    <h2>Rêve · Répartition EuroMillions</h2>
-    <p class="hint">Si un jour… Saisissez la cagnotte, le taux de placement et la <b>part (%) de chacun</b> : le montant reçu et les rentes se calculent automatiquement. La somme des parts doit faire 100 %.</p>
-    <div class="scenbar" style="margin-bottom:14px">
-      <label>Cagnotte gagnée : <input class="cell edit" style="width:160px" id="euCag" oninput="onEu()"></label>
-      <label>Taux de placement (%) : <input class="cell edit" style="width:80px" id="euTaux" oninput="onEu()"></label>
-      <span id="euEcart" style="font-weight:bold"></span>
-    </div>
-    <div class="scrollx"><table id="tblReve"></table></div>
-    <div class="toolbar"><button class="btn mini" onclick="addBenef()">+ Ajouter un bénéficiaire</button></div>
-  </section>
-
-  <p class="foot">Mes Finances v2 · multi-comptes · données enregistrées dans ce navigateur (localStorage). Gardez une copie du fichier pour la sauvegarde.</p>
+<nav>
+  <div class="logo">Tandem<span>.</span></div>
+  <a href="#waitlist" class="btn ghost" style="padding:9px 18px">Rejoindre la liste</a>
+</nav>
 </div>
 
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge">🇫🇷 Bêta privée · finances de couple</span>
+      <h1>L'argent du couple, <em>enfin clair.</em></h1>
+      <p class="lead">Qui a payé quoi ? Combien virer sur le compte joint ? Est-ce qu'on tient nos projets ? Tandem répond, et vous évite la dispute du dimanche soir.</p>
+      <form class="form" id="heroForm" onsubmit="return signup(event,'hero')">
+        <input type="email" id="emailHero" placeholder="votre e-mail" required>
+        <button class="btn" type="submit">Rejoindre la liste</button>
+      </form>
+      <p class="trust">🔒 Sans engagement · <span class="count" id="cnt1">0</span> couples déjà inscrits · on vous prévient au lancement.</p>
+    </div>
+    <div class="mock">
+      <h4>Répartition du compte joint</h4>
+      <div class="row"><span>Crédit maison</span><span><span class="chip w">Alex 79%</span> <b>2 312 €</b></span></div>
+      <div class="row"><span>Assurance habitation</span><span><span class="chip w">Alex 50%</span> <b>85 €</b></span></div>
+      <div class="row"><span>Eau</span><span><span class="chip h">Charlie 60%</span> <b>82 €</b></span></div>
+      <div class="row"><span>Épargne des enfants</span><span><span class="chip w">50/50</span> <b>65 €</b></span></div>
+      <div style="margin-top:12px;padding:12px;background:#eefaf8;border-radius:10px;font-size:13.5px">
+        <div style="display:flex;justify-content:space-between"><span>Alex vire</span><b>1 950 €</b></div>
+        <div style="display:flex;justify-content:space-between"><span>Sa juste part</span><b>1 943 €</b></div>
+        <div style="display:flex;justify-content:space-between;color:#1e7d34;font-weight:700"><span>Écart</span><span>+7 € ✓ calibré</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="pain">
+  <div class="wrap">
+    <div class="eyebrow">Le problème</div>
+    <h2>Gérer l'argent à deux, c'est le flou</h2>
+    <p class="sub">Les applis de budget savent dire où est parti l'argent le mois dernier. Aucune ne dit qui doit payer quoi, ni où vous en serez dans un an.</p>
+    <div class="cards">
+      <div class="card"><div class="ic">🤷</div><h3>« Qui a payé quoi ? »</h3><p>Impossible de savoir qui porte réellement chaque dépense entre le compte perso et le compte joint.</p></div>
+      <div class="card"><div class="ic">💸</div><h3>Des virements au pif</h3><p>Vous virez 1 950 €, l'autre 600 €… mais personne ne sait si c'est juste ni ce que ça couvre.</p></div>
+      <div class="card"><div class="ic">🔮</div><h3>Zéro visibilité sur demain</h3><p>Travaux, voiture, école : aucun outil ne vous projette ensemble sur les mois qui viennent.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f2f8f7">
+  <div class="wrap">
+    <div class="eyebrow">La solution</div>
+    <h2>Tandem, l'appli pensée pour deux</h2>
+    <p class="sub">Le premier outil qui répartit, réconcilie et vous projette, à deux.</p>
+    <div class="cards">
+      <div class="card"><div class="ic">⚖️</div><h3>Répartition par poste</h3><p>Définissez qui paie quoi, poste par poste. Tandem calcule la juste part de chacun.</p></div>
+      <div class="card"><div class="ic">🔄</div><h3>Réconciliation du joint</h3><p>Le bon virement à faire pour couvrir pile sa part. Fini les « tu me dois combien ? ».</p></div>
+      <div class="card"><div class="ic">📈</div><h3>Projection à deux</h3><p>36 mois devant vous, avec scénarios prudent / réaliste / optimiste.</p></div>
+      <div class="card"><div class="ic">🏗️</div><h3>Vos projets communs</h3><p>Travaux, voiture, vacances : simulez leur impact et financez-les intelligemment.</p></div>
+      <div class="card"><div class="ic">📅</div><h3>Le vrai rythme de paie</h3><p>Voyez le creux de trésorerie avant le 28, quand le compte est au plus bas.</p></div>
+      <div class="card"><div class="ic">👶</div><h3>Épargne des enfants</h3><p>Un livret par enfant, alimenté automatiquement depuis le compte commun.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Comment ça marche</div>
+    <h2>Trois étapes, deux personnes</h2>
+    <div class="steps" style="margin-top:36px">
+      <div class="step"><div class="n">1</div><h3>Connectez vos comptes</h3><p style="color:var(--muted)">Chacun relie ses comptes en sécurité (partenaire agréé). Ou en 100 % local si vous préférez la discrétion.</p></div>
+      <div class="step"><div class="n">2</div><h3>Réglez la répartition</h3><p style="color:var(--muted)">Qui paie quoi, poste par poste. Tandem calcule les virements justes vers le compte joint.</p></div>
+      <div class="step"><div class="n">3</div><h3>Projetez-vous</h3><p style="color:var(--muted)">Trésorerie, épargne, projets : voyez où vous allez, ensemble, sur 36 mois.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f2f8f7">
+  <div class="wrap">
+    <div class="eyebrow">Tarifs</div>
+    <h2>Un seul abonnement pour deux</h2>
+    <p class="sub">Gratuit pour commencer. Un prix, pour tout le foyer, pas par personne.</p>
+    <div class="price">
+      <div class="plan"><h3>Gratuit</h3><div class="amt">0 €</div>
+        <ul><li>Suivi &amp; répartition par poste</li><li>Projection 36 mois &amp; scénarios</li><li>100 % local, données privées</li></ul>
+        <a href="#waitlist" class="btn ghost" style="width:100%;text-align:center">Commencer gratuitement</a>
+      </div>
+      <div class="plan best"><h3>Premium foyer</h3><div class="amt">6 €<small>/mois · pour deux</small></div>
+        <ul><li>Tout le gratuit, +</li><li>Synchronisation bancaire automatique</li><li>Cloud partagé entre partenaires</li><li>Alertes &amp; rappels de virements</li></ul>
+        <a href="#waitlist" class="btn" style="width:100%;text-align:center">Rejoindre la bêta</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trustband">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#7fe3df">Confiance</div>
+    <h2 style="color:#fff">Vos données restent les vôtres</h2>
+    <div class="cards" style="margin-top:30px">
+      <div class="card"><div class="ic">🔒</div><h3>Mode 100 % local</h3><p>Possibilité de tout garder sur votre appareil, sans cloud.</p></div>
+      <div class="card"><div class="ic">🏦</div><h3>Agrégation agréée</h3><p>La connexion bancaire passe par un partenaire agréé ACPR (DSP2). On ne stocke jamais vos identifiants.</p></div>
+      <div class="card"><div class="ic">🇫🇷</div><h3>Conçu en France</h3><p>Pensé pour les comptes, l'épargne réglementée et les habitudes françaises.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap faq">
+    <div class="eyebrow">Questions</div>
+    <h2>Ce qu'on nous demande</h2>
+    <div style="margin-top:30px">
+      <div class="q"><h4>Faut-il être deux pour l'utiliser ?</h4><p>Non, mais c'est là que Tandem brille. En solo, ça marche aussi comme un outil de projection perso.</p></div>
+      <div class="q"><h4>Mes identifiants bancaires sont-ils en sécurité ?</h4><p>Oui. La connexion passe par un agrégateur agréé ACPR ; on ne voit ni ne stocke vos mots de passe. Et un mode 100 % local existe.</p></div>
+      <div class="q"><h4>Ça remplace Bankin' ou Linxo ?</h4><p>Ça fait ce qu'elles ne font pas : répartir à deux et vous projeter. Complémentaire, avec un angle couple assumé.</p></div>
+      <div class="q"><h4>C'est quand, le lancement ?</h4><p>La bêta privée arrive bientôt. Inscrivez-vous pour être prévenus en premier (et aider à façonner le produit).</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="waitlist">
+  <div class="wrap">
+    <div class="cta">
+      <div class="eyebrow" style="color:#c9f3f0">Bêta privée</div>
+      <h2>Arrêtez de deviner. Gérez à deux.</h2>
+      <p style="max-width:520px;margin:8px auto 0;opacity:.95">Rejoignez la liste d'attente : on vous invite au lancement et on écoute vos besoins.</p>
+      <form class="form" id="ctaForm" onsubmit="return signup(event,'cta')">
+        <input type="email" id="emailCta" placeholder="votre e-mail" required>
+        <button class="btn" type="submit" style="background:#fff;color:var(--teal2)">Je rejoins</button>
+      </form>
+      <p style="margin-top:12px;font-size:13px;opacity:.9"><span class="count" id="cnt2">0</span> couples déjà inscrits</p>
+    </div>
+    <div class="note">🛠️ <b>Note technique (pour toi)</b> : le formulaire est branché sur <b>Formspree</b> (form <code>xgogoozg</code>) ; les inscriptions arrivent par e-mail à <b>aly.william@gmail.com</b>. Deux points à vérifier : (1) l'envoi ne marche qu'une fois la page <b>mise en ligne</b> (pas en simple ouverture du fichier en local) ; (2) sur Formspree, confirme que le destinataire du formulaire est bien aly.william@gmail.com et valide la 1re inscription (Formspree envoie un e-mail d'activation). « Tandem » reste un nom de travail.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Tandem · nom de travail · démo de validation · © 2026</div>
+</footer>
+
 <script>
-/* ================= MODÈLE PAR DÉFAUT ================= */
-const DEFAULTS = {
-  scenario:'realiste',
-  params:{
-    prudent:  {salGrowth:0,   inflation:0.04,  imprevus:400, epargne:50,  rendement:0.02,  revalImmo:0},
-    realiste: {salGrowth:0.02, inflation:0.02,  imprevus:200, epargne:150, rendement:0.025, revalImmo:0.01},
-    optimiste:{salGrowth:0.05, inflation:0.015, imprevus:100, epargne:400, rendement:0.035, revalImmo:0.03}
-  },
-  comptes:[
-    {id:'will',   nom:'Compte courant Alex', titulaire:'Alex',  type:'Courant',   solde:-805.73},
-    {id:'hono',   nom:'Compte courant Charlie', titulaire:'Charlie',  type:'Courant',   solde:0},
-    {id:'joint',  nom:'Compte joint',        titulaire:'Joint', type:'Courant',   solde:0},
-    {id:'livret', nom:'Livret A / Épargne',  titulaire:'Joint', type:'Épargne',   solde:0},
-    {id:'enfants',nom:'Épargne enfants',     titulaire:'Joint', type:'Épargne',   solde:0},
-    {id:'placement',nom:'Placement (PEL / commissions)',titulaire:'Alex',type:'Placement',solde:0}
-  ],
-  revenus:[
-    {source:'Salaire net', benef:'Alex', compte:'will', montant:3835, note:'Salaire net mensuel', edit:false},
-    {source:'Salaire net', benef:'Charlie', compte:'hono', montant:0, note:'⚠ À compléter · salaire net de Charlie', edit:true},
-    {source:'Commission', benef:'Alex', compte:'placement', montant:0, note:'Routée automatiquement vers le placement', edit:true},
-    {source:'Autre revenu', benef:'', compte:'will', montant:0, note:'', edit:true}
-  ],
-  depenses:[
-    {poste:'Crédit maison', cat:'Logement', partAlex:0.5, compte:'joint', montant:2312.37, edit:false},
-    {poste:'Assurance habitation', cat:'Assurances', partAlex:0.5, compte:'joint', montant:85.43, edit:false},
-    {poste:'Eau', cat:'Énergie & Eau', partAlex:0.5, compte:'joint', montant:82, edit:false},
-    {poste:'Nounou / garde', cat:'Enfants', partAlex:0.5, compte:'joint', montant:0, edit:true},
-    {poste:'Assurance voiture', cat:'Assurances', partAlex:1, compte:'will', montant:25.72, edit:false},
-    {poste:'Assurance moto', cat:'Assurances', partAlex:1, compte:'will', montant:26.05, edit:false},
-    {poste:'Mutuelle santé', cat:'Santé', partAlex:1, compte:'will', montant:166.94, edit:false},
-    {poste:'Énergie (Total Energie)', cat:'Énergie & Eau', partAlex:1, compte:'will', montant:315, edit:false},
-    {poste:'Internet (Free)', cat:'Télécom', partAlex:1, compte:'will', montant:39.99, edit:false},
-    {poste:'Mobile (Free)', cat:'Télécom', partAlex:1, compte:'will', montant:12, edit:false},
-    {poste:'Amex (remboursement)', cat:'Divers', partAlex:1, compte:'will', montant:45, edit:false},
-    {poste:'Urssaf', cat:'Impôts & Taxes', partAlex:1, compte:'will', montant:281.87, edit:false},
-    {poste:'Impôt sur le revenu (PAS)', cat:'Impôts & Taxes', partAlex:1, compte:'will', montant:700, edit:false},
-    {poste:'Impôts fonciers (lissé)', cat:'Impôts & Taxes', partAlex:1, compte:'will', montant:190, edit:false},
-    {poste:'École / frais scolaires', cat:'Enfants', partAlex:1, compte:'will', montant:315, edit:false},
-    {poste:'Applecare', cat:'Divers', partAlex:1, compte:'will', montant:15.49, edit:false},
-    {poste:'Abonnements divers', cat:'Divers', partAlex:1, compte:'will', montant:0, edit:true}
-  ],
-  virements:[
-    {libelle:'Virement vers joint (Alex)', de:'will', vers:'joint', montant:1950, partAlex:1},
-    {libelle:'Virement vers joint (Charlie)', de:'hono', vers:'joint', montant:600, partAlex:0},
-    {libelle:'Épargne Maelle', de:'joint', vers:'enfants', montant:25, partAlex:0.5},
-    {libelle:'Épargne Axelle', de:'joint', vers:'enfants', montant:25, partAlex:0.5},
-    {libelle:'Épargne Camille', de:'joint', vers:'enfants', montant:15, partAlex:0.5}
-  ],
-  patrimoine:{immo:460000,vehicules:15000,autres:0,capitalDu:250000,autresDettes:0,tauxCredit:0.03},
-  projets:[
-    {libelle:'Travaux maison (rénovation)', cat:'Logement', mois:6, montant:120000, seuil:1, compte:'livret'},
-    {libelle:'Mobilier / équipement', cat:'Maison', mois:9, montant:3000, seuil:2, compte:'will'},
-    {libelle:'Vacances / voyage famille', cat:'Loisirs', mois:12, montant:4000, seuil:3, compte:'will'},
-    {libelle:'Changement de voiture', cat:'Transport', mois:18, montant:12000, seuil:2, compte:'livret'},
-    {libelle:'Provision imprévu santé', cat:'Santé', mois:24, montant:2000, seuil:1, compte:'livret'}
-  ],
-  euromillions:{cagnotte:160000000,taux:0.025,benef:[
-    {nom:'Alex (moi)',part:0.375},{nom:'Charlie',part:0.075},{nom:'Les filles',part:0.125},
-    {nom:'Les vieux',part:0.0125},{nom:'Carlos',part:0.03125},{nom:'Den',part:0.03125},
-    {nom:'Mimi',part:0.03125},{nom:'Sam',part:0.03125},{nom:'Sheila',part:0.03125},
-    {nom:'Perrine',part:0.03125},{nom:'Juju',part:0.03125},{nom:'Jorge',part:0.03125},
-    {nom:'Saliou',part:0.01875},{nom:'Adri',part:0.0125},{nom:'Lily',part:0.00625},
-    {nom:'Cha',part:0.00625},{nom:'So',part:0.00625},{nom:'Portugal',part:0.0375},
-    {nom:'La forêt',part:0.03125},{nom:'Achat direct (maison…)',part:0.04375},{nom:'Divers / réserve',part:0}
-  ]}
-};
-const RANK={prudent:1,realiste:2,optimiste:3};
-const CATS=['Logement','Assurances','Santé','Énergie & Eau','Télécom','Impôts & Taxes','Enfants','Divers','Maison','Loisirs','Transport'];
-const PIE_COLORS=['#2E5496','#ED7D31','#70AD47','#FFC000','#5B9BD5','#C00000','#7030A0','#A6A6A6','#264478','#9E480E','#43682B'];
-const KEY='mesFinances_v3';
-
-function clone(o){return JSON.parse(JSON.stringify(o));}
-let S;
-function load(){ try{S=JSON.parse(localStorage.getItem(KEY))||null;}catch(e){S=null;} if(!S)S=clone(DEFAULTS); migrate(); }
-const DEP_JOUR={'Crédit maison':5,'Assurance habitation':5,'Eau':5,'Nounou / garde':5,'Assurance voiture':5,'Assurance moto':10,'Mutuelle santé':5,'Énergie (Total Energie)':6,'Internet (Free)':6,'Mobile (Free)':20,'Amex (remboursement)':23,'Urssaf':5,'Impôt sur le revenu (PAS)':27,'Impôts fonciers (lissé)':15,'École / frais scolaires':15,'Applecare':23,'Abonnements divers':1};
-function migrate(){
-  (S.depenses||[]).forEach(d=>{ if(d.partAlex===undefined){ d.partAlex = d.responsable==='Alex'?1:d.responsable==='Charlie'?0:0.5; } if(d.jour==null){ d.jour = DEP_JOUR[d.poste]||5; } });
-  (S.virements||[]).forEach(t=>{ if(t.partAlex===undefined){ t.partAlex = t.de==='joint'?0.5:1; } if(t.jour==null){ t.jour = t.de==='joint'?3:28; } });
-  (S.revenus||[]).forEach(r=>{ if(r.jour==null) r.jour=28; });
-  (S.projets||[]).forEach(x=>{ if(x.jour==null) x.jour=15; });
-  if(S.refDate===undefined) S.refDate=null;
+const LKEY='tandem_leads';
+function getLeads(){try{return JSON.parse(localStorage.getItem(LKEY))||[];}catch(e){return[];}}
+const FORMSPREE='https://formspree.io/f/xgogoozg';   // inscriptions -> e-mail aly.william@gmail.com (destinataire à confirmer côté Formspree)
+function saveLead(email){
+  const l=getLeads(); if(!l.includes(email)){l.push(email);localStorage.setItem(LKEY,JSON.stringify(l));} return l.length;
 }
-function save(){ localStorage.setItem(KEY,JSON.stringify(S)); }
-function resetAll(){ if(confirm('Réinitialiser toutes les données aux valeurs de départ ?')){S=clone(DEFAULTS);migrate();save();renderAll();} }
-function setRef(v){ S.refDate=v||null; save(); renderAll(); }
-
-const eur0=new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0});
-const eur2=new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',minimumFractionDigits:2,maximumFractionDigits:2});
-const pct=v=>(v*100).toLocaleString('fr-FR',{maximumFractionDigits:1})+' %';
-const money=(v,d=0)=>{const s=(d?eur2:eur0).format(v||0);return `<span class="num ${v<0?'neg':''}">${s}</span>`;}
-const num=v=>parseFloat((''+v).replace(',','.').replace(/[^0-9.\-]/g,''))||0;
-const acctName=id=>{const c=S.comptes.find(x=>x.id===id);return c?c.nom:'·';};
-const acctIndex=()=>{const m={};S.comptes.forEach((c,i)=>m[c.id]=i);return m;};
-const titOf=id=>{const c=S.comptes.find(x=>x.id===id);return c?c.titulaire:'';};
-const partWd=d=>d.partAlex!=null?num(d.partAlex):(d.responsable==='Alex'?1:d.responsable==='Charlie'?0:0.5);
-const partWv=t=>t.partAlex!=null?num(t.partAlex):0.5;
-function depShare(who){return S.depenses.reduce((a,d)=>{const w=partWd(d);return a+num(d.montant)*(who==='Alex'?w:1-w);},0);}
-function jointRecon(){
-  const rows=[];
-  S.depenses.forEach((d,i)=>{ if(d.compte==='joint'){ rows.push({label:d.poste,montant:num(d.montant),pw:partWd(d),path:`depenses.${i}.partAlex|pct`}); }});
-  S.virements.forEach((t,i)=>{ if(t.de==='joint'){ rows.push({label:t.libelle,montant:num(t.montant),pw:partWv(t),path:`virements.${i}.partAlex|pct`}); }});
-  let cw=0,ch=0;
-  S.virements.forEach(t=>{ if(t.vers==='joint'){ const ti=titOf(t.de); if(ti==='Alex')cw+=num(t.montant); else if(ti==='Charlie')ch+=num(t.montant); }});
-  return {rows,contribAlex:cw,contribCharlie:ch};
-}
-
-/* ================= MOTEUR MULTI-COMPTES ================= */
-function daysInMonth(y,m){return new Date(y,m+1,0).getDate();}
-function clampDay(v,def){v=parseInt(v);if(!v||v<1)return def;return v>28?28:v;}
-function pad2(x){return(''+x).padStart(2,'0');}
-function isoLocal(d){return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());}
-function refInfo(){ if(S.refDate){const q=(''+S.refDate).split('-'); if(q.length===3){const d=new Date(+q[0],+q[1]-1,+q[2]); if(!isNaN(d.getTime()))return d;}} return new Date(); }
-function compute(){
-  const p=S.params[S.scenario], rank=RANK[S.scenario];
-  const A=S.comptes, N=A.length, idx=acctIndex();
-  const principal=A.findIndex(c=>c.type==='Courant');           // compte de Alex par défaut
-  let placement=A.findIndex(c=>c.type==='Placement');
-  if(placement<0) placement=A.findIndex(c=>c.type==='Épargne');
-  const ref=refInfo(), refDay=ref.getDate();
-  let cur=A.map(c=>num(c.solde));
-  const capInit=num(S.patrimoine.capitalDu), taux=num(S.patrimoine.tauxCredit);
-  const mens=S.depenses.filter(d=>d.cat==='Logement').reduce((a,d)=>a+num(d.montant),0);
-  const immoInit=num(S.patrimoine.immo), other=num(S.patrimoine.vehicules)+num(S.patrimoine.autres);
-  let L=capInit; const rows=[]; let upcoming=[];
-  for(let m=0;m<36;m++){
-    const dt=new Date(ref.getFullYear(),ref.getMonth()+m,1);
-    const n=m+1, gRev=Math.pow(1+p.salGrowth,(n-1)/12), gDep=Math.pow(1+p.inflation,(n-1)/12);
-    A.forEach((c,i)=>{ if(c.type!=='Courant' && cur[i]>0) cur[i]+=cur[i]*p.rendement/12; });
-    const Fl=[]; let totRev=0,totDep=0,proj=0;
-    S.revenus.forEach(r=>{const v=num(r.montant)*gRev;totRev+=v;const a=idx[r.compte];if(a!=null)Fl.push({day:clampDay(r.jour,28),acct:a,amt:v,lib:r.source});});
-    S.depenses.forEach(d=>{const v=num(d.montant)*gDep;totDep+=v;const a=idx[d.compte];if(a!=null)Fl.push({day:clampDay(d.jour,5),acct:a,amt:-v,lib:d.poste});});
-    if(principal>=0){Fl.push({day:15,acct:principal,amt:-p.imprevus,lib:'Imprévus'});totDep+=p.imprevus;}
-    S.virements.forEach(t=>{const v=num(t.montant),de=idx[t.de],ve=idx[t.vers],day=clampDay(t.jour,28);if(de!=null)Fl.push({day,acct:de,amt:-v,lib:t.libelle});if(ve!=null)Fl.push({day,acct:ve,amt:v,lib:t.libelle});});
-    if(principal>=0&&placement>=0&&p.epargne>0){Fl.push({day:28,acct:principal,amt:-p.epargne,lib:'Épargne auto'});Fl.push({day:28,acct:placement,amt:p.epargne,lib:'Épargne auto'});}
-    S.projets.filter(x=>+x.mois===n&&rank>=+x.seuil).forEach(x=>{const v=num(x.montant);proj+=v;const a=idx[x.compte];if(a!=null)Fl.push({day:clampDay(x.jour,15),acct:a,amt:-v,lib:x.libelle});});
-    totDep+=proj;
-    const startDay=(m===0)?refDay:0;
-    const flows=Fl.filter(f=>f.day>startDay).sort((a,b)=>a.day-b.day);
-    if(m===0) upcoming=flows.map(f=>({day:f.day,acct:A[f.acct].nom,amt:f.amt,lib:f.lib}));
-    let mn=cur.slice(), run=cur.slice();
-    flows.forEach(f=>{run[f.acct]+=f.amt; if(run[f.acct]<mn[f.acct])mn[f.acct]=run[f.acct];});
-    cur=run;
-    L=Math.max(0,L-(mens-L*taux/12));
-    const courant=A.reduce((s,c,i)=>s+(c.type==='Courant'?cur[i]:0),0);
-    const epargne=A.reduce((s,c,i)=>s+(c.type!=='Courant'?cur[i]:0),0);
-    const immo=immoInit*Math.pow(1+p.revalImmo,n/12);
-    const patn=courant+epargne+immo-L+other;
-    rows.push({n,date:dt,bal:cur.slice(),min:mn.slice(),courant,epargne,immo,capital:L,patn,rev:totRev,dep:totDep,proj});
+function refresh(){const n=getLeads().length;document.getElementById('cnt1').textContent=n;document.getElementById('cnt2').textContent=n;}
+function done(form,where){form.innerHTML='<div style="padding:13px 4px;font-weight:700;color:'+(where==='cta'?'#fff':'#0c7d84')+'">✓ Merci ! Vous êtes sur la liste, on vous écrit très vite.</div>';refresh();}
+function fail(form,msg){let e=form.querySelector('.err');if(!e){e=document.createElement('div');e.className='err';e.style.cssText='width:100%;font-size:13px;margin-top:8px;color:#ffd5d0;font-weight:600';form.appendChild(e);}e.textContent=msg;const b=form.querySelector('button');if(b){b.disabled=false;b.textContent=b.dataset.lbl||'Envoyer';}}
+async function signup(e,where){
+  e.preventDefault();
+  const inp=document.getElementById(where==='hero'?'emailHero':'emailCta');
+  const email=(inp.value||'').trim();
+  if(!email||!email.includes('@')){inp.focus();return false;}
+  const form=e.target;
+  const btn=form.querySelector('button'); if(btn){btn.dataset.lbl=btn.textContent;btn.disabled=true;btn.textContent='Envoi…';}
+  try{
+    const res=await fetch(FORMSPREE,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({email:email,_subject:'Nouvelle inscription — Tandem',source:where})});
+    if(res.ok){ saveLead(email); done(form,where); }
+    else{ let msg='Une erreur est survenue, réessayez.'; try{const j=await res.json(); if(j.errors&&j.errors.length) msg=j.errors.map(x=>x.message).join(', ');}catch(_){}
+      fail(form,msg); }
+  }catch(err){
+    // ouverture en local (file://) ou hors-ligne : on garde en secours
+    saveLead(email); done(form,where);
+    fail(form,"Note : l'envoi par e-mail ne fonctionne qu'une fois la page en ligne.");
   }
-  const courant0=A.reduce((s,c,i)=>s+(c.type==='Courant'?num(c.solde):0),0);
-  const epargne0=A.reduce((s,c,i)=>s+(c.type!=='Courant'?num(c.solde):0),0);
-  const patn0=courant0+epargne0+immoInit-capInit+other;
-  return {rows,upcoming,courant0,epargne0,patn0,refDay,refDate:ref};
+  return false;
 }
-function accountSummary(){
-  const c=compute(), A=S.comptes;
-  return A.map((acct,i)=>{
-    let mn=num(acct.solde), mnMonth=0;
-    c.rows.forEach(r=>{ if(r.min[i]<mn){mn=r.min[i];mnMonth=r.n;} });
-    const end=c.rows[c.rows.length-1].bal[i];
-    return {acct,init:num(acct.solde),end,min:mn,minMonth:mnMonth,neg:mn<-0.5};
-  });
-}
-
-/* ================= TABLEAU DE BORD ================= */
-function renderDash(){
-  document.querySelectorAll('#segScen button').forEach(b=>b.classList.toggle('on',b.dataset.s===S.scenario));
-  const c=compute(), R=c.rows, last=R[R.length-1], first=R[0];
-  const rin=document.getElementById('refDateInp'); if(rin) rin.value=isoLocal(c.refDate);
-  const kpis=[
-    ['Trésorerie aujourd\'hui', eur2.format(c.courant0), c.courant0<0],
-    ['Trésorerie à 36 mois', eur0.format(last.courant), last.courant<0],
-    ['Épargne + placements à 36 mois', eur0.format(last.epargne), false],
-    ['Patrimoine net à 36 mois', eur0.format(last.patn), false]
-  ];
-  document.getElementById('kpis').innerHTML=kpis.map(k=>`<div class="kpi"><div class="lab">${k[0]}</div><div class="v ${k[2]?'neg':''}">${k[1]}</div></div>`).join('');
-  // statut comptes (creux = point bas intra-mois)
-  const sum=accountSummary();
-  let th=`<thead><tr><th>Compte</th><th>Titulaire</th><th>Type</th><th class="num">Solde aujourd'hui</th><th class="num">Solde à 36 mois</th><th class="num">Creux mini</th><th>Statut</th></tr></thead><tbody>`;
-  sum.forEach(s=>{
-    const stat=s.neg?`<span class="badge ko">⚠ creux négatif (M${s.minMonth})</span>`:`<span class="badge ok">✔ ok</span>`;
-    th+=`<tr><td>${s.acct.nom}</td><td>${s.acct.titulaire||''}</td><td>${s.acct.type}</td>
-    <td>${money(s.init)}</td><td>${money(s.end)}</td><td>${money(s.min)}</td><td>${stat}</td></tr>`;
-  });
-  th+=`</tbody>`;
-  document.getElementById('acctStatus').innerHTML=th;
-  // mouvements à venir ce mois-ci
-  const up=c.upcoming; let uh;
-  if(!up.length){ uh=`<p class="hint" style="margin:0">Plus aucun mouvement d'ici la fin du mois · tout est passé. Prochain salaire le 28 du mois prochain.</p>`; }
-  else{
-    uh=`<div class="scrollx"><table><thead><tr><th style="width:70px">Jour</th><th>Mouvement</th><th>Compte</th><th class="num">Montant</th></tr></thead><tbody>`;
-    up.forEach(u=>{ uh+=`<tr><td>le ${u.day}</td><td>${u.lib}</td><td>${u.acct}</td><td>${money(u.amt)}</td></tr>`; });
-    uh+=`</tbody></table></div><p class="hint">Trésorerie projetée en fin de mois : <b>${eur2.format(c.rows[0].courant)}</b> · le « creux mini » du tableau ci-dessus indique le point le plus bas de chaque compte avant la paie du 28.</p>`;
-  }
-  document.getElementById('upcoming').innerHTML=uh;
-  // alerte
-  const anyNeg=sum.some(s=>s.neg);
-  let a;
-  if(anyNeg) a=['bad','⚠ Un ou plusieurs comptes passent en négatif sur la période (voir tableau des comptes). Complétez les revenus, ajustez les virements ou décalez les projets.'];
-  else a=['ok','✔ Tous les comptes restent positifs sur les 36 mois.'];
-  document.getElementById('alertBox').innerHTML=`<div class="alert ${a[0]}">${a[1]}</div>`;
-  // graphiques
-  const labels=R.map(r=>r.date.toLocaleDateString('fr-FR',{month:'short',year:'2-digit'}));
-  const series=S.comptes.map((c2,i)=>({name:c2.nom,color:PIE_COLORS[i%PIE_COLORS.length],data:R.map(r=>r.bal[i])}));
-  lineChart('chAcc',labels,series,true);
-  lineChart('chPat',labels,[{name:'Patrimoine net',color:'#70AD47',data:R.map(r=>r.patn)}]);
-  lineChart('chRD',labels,[{name:'Revenus',color:'#2E5496',data:R.map(r=>r.rev)},{name:'Dépenses',color:'#C00000',data:R.map(r=>r.dep+r.proj)}]);
-  const byCat={}; S.depenses.forEach(d=>{byCat[d.cat]=(byCat[d.cat]||0)+num(d.montant);});
-  pieChart('chPie',Object.entries(byCat).filter(e=>e[1]>0).map(e=>({label:e[0],value:e[1]})));
-}
-
-/* ================= GRAPHIQUES SVG ================= */
-function lineChart(id,labels,series,zeroLine){
-  const W=520,H=250,pl=64,pr=14,pt=16,pb=48;
-  const all=series.flatMap(s=>s.data); let mn=Math.min(...all,0),mx=Math.max(...all,0);
-  if(mn===mx)mx=mn+1; const pad=(mx-mn)*0.08||1; mn-=pad; mx+=pad;
-  const x=i=>pl+(W-pl-pr)*i/(labels.length-1), y=v=>pt+(H-pt-pb)*(1-(v-mn)/(mx-mn));
-  let g='';
-  for(let t=0;t<=4;t++){const v=mn+(mx-mn)*t/4,yy=y(v);
-    g+=`<line x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}" stroke="#eef1f6"/>`;
-    g+=`<text x="${pl-6}" y="${yy+3}" text-anchor="end" font-size="9" fill="#98a2b3">${eur0.format(v)}</text>`;}
-  if(zeroLine&&mn<0&&mx>0){g+=`<line x1="${pl}" y1="${y(0)}" x2="${W-pr}" y2="${y(0)}" stroke="#C00000" stroke-dasharray="4 3"/>`;}
-  labels.forEach((l,i)=>{if(i%6===0||i===labels.length-1)g+=`<text x="${x(i)}" y="${H-pb+18}" text-anchor="middle" font-size="9" fill="#98a2b3">${l}</text>`;});
-  series.forEach(s=>{const pts=s.data.map((v,i)=>`${x(i)},${y(v)}`).join(' ');g+=`<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="2"/>`;});
-  if(series.length>1){let lx=pl,ly=H-14;series.forEach(s=>{g+=`<rect x="${lx}" y="${ly-8}" width="9" height="9" rx="2" fill="${s.color}"/><text x="${lx+13}" y="${ly}" font-size="9" fill="#555">${s.name}</text>`;lx+=Math.min(150,(W-pl)/series.length);});}
-  document.getElementById(id).innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">${g}</svg>`;
-}
-function pieChart(id,data){
-  const W=520,H=250,cx=120,cy=120,r=92,tot=data.reduce((a,d)=>a+d.value,0)||1;
-  let ang=-Math.PI/2,g='';
-  data.forEach((d,i)=>{const a2=ang+2*Math.PI*d.value/tot;
-    const x1=cx+r*Math.cos(ang),y1=cy+r*Math.sin(ang),x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2),large=(a2-ang)>Math.PI?1:0;
-    g+=`<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large} 1 ${x2},${y2} Z" fill="${PIE_COLORS[i%PIE_COLORS.length]}" stroke="#fff" stroke-width="1.5"/>`;ang=a2;});
-  let ly=20;data.forEach((d,i)=>{g+=`<g transform="translate(258,${ly})"><rect width="11" height="11" rx="2" fill="${PIE_COLORS[i%PIE_COLORS.length]}"/><text x="16" y="10" font-size="11" fill="#333">${d.label} · ${eur0.format(d.value)} (${pct(d.value/tot)})</text></g>`;ly+=20;});
-  document.getElementById(id).innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto">${g}</svg>`;
-}
-
-/* ================= SAISIES ================= */
-function inp(v,path,cls='',ph=''){return `<input class="cell ${cls}" value="${v}" data-path="${path}" placeholder="${ph}">`;}
-function txt(v,path,cls='',ph=''){return `<input class="cell txt ${cls}" value="${v??''}" data-path="${path}" placeholder="${ph}">`;}
-function selOf(list,cur,path){return `<select class="cell" data-path="${path}">${list.map(o=>`<option value="${o.v}" ${o.v===cur?'selected':''}>${o.t}</option>`).join('')}</select>`;}
-function catSelect(v,path){return selOf(CATS.map(c=>({v:c,t:c})),v,path);}
-function respSelect(v,path){return selOf([{v:'Alex',t:'Alex'},{v:'Charlie',t:'Charlie'},{v:'Joint',t:'Joint'}],v||'Joint',path);}
-function acctSelect(v,path){return selOf(S.comptes.map(c=>({v:c.id,t:c.nom})),v,path);}
-
-function renderParam(){
-  const rows=[['salGrowth','Croissance salaire (annuelle)','%'],['inflation','Inflation des dépenses (annuelle)','%'],
-  ['imprevus','Imprévus / dépenses variables (compte Alex)','€/mois'],['epargne','Épargne mensuelle auto (Alex → placement)','€/mois'],
-  ['rendement','Rendement épargne/placement (annuel)','%'],['revalImmo','Revalorisation immobilière','%']];
-  let h=`<thead><tr><th>Levier</th><th>Unité</th><th style="text-align:center">Prudent</th><th style="text-align:center">Réaliste</th><th style="text-align:center">Optimiste</th></tr></thead><tbody>`;
-  rows.forEach(([k,lab,u])=>{const isP=u==='%';
-    const cell=sc=>{const v=S.params[sc][k];return `<td style="text-align:center">${inp(isP?(v*100):v,`params.${sc}.${k}${isP?'|pct':''}`,'edit')}</td>`;};
-    h+=`<tr><td>${lab}</td><td style="color:#7a869a">${u}</td>${cell('prudent')}${cell('realiste')}${cell('optimiste')}</tr>`;});
-  document.getElementById('tblParam').innerHTML=h+`</tbody>`;
-}
-function renderRev(){
-  let h=`<thead><tr><th>Source</th><th style="width:100px">Bénéficiaire</th><th style="width:170px">Vers le compte</th><th style="width:70px">Jour</th><th style="width:120px">Montant / mois</th><th>Note</th><th></th></tr></thead><tbody>`;
-  S.revenus.forEach((r,i)=>{h+=`<tr><td>${txt(r.source,`revenus.${i}.source`)}</td><td>${respSelect(r.benef,`revenus.${i}.benef`)}</td>
-  <td>${acctSelect(r.compte,`revenus.${i}.compte`)}</td><td>${inp(clampDay(r.jour,28),`revenus.${i}.jour`,'edit')}</td><td>${inp(r.montant,`revenus.${i}.montant`,r.edit?'edit':'')}</td>
-  <td style="font-size:12px;color:#7a869a">${r.note||''}</td><td><button class="btn del mini" onclick="delRow('revenus',${i})">✕</button></td></tr>`;});
-  const tot=S.revenus.reduce((a,r)=>a+num(r.montant),0);
-  h+=`</tbody><tfoot><tr><td colspan="4">TOTAL REVENUS / mois</td><td class="num" id="revTotal">${eur2.format(tot)}</td><td colspan="2"></td></tr></tfoot>`;
-  document.getElementById('tblRev').innerHTML=h;
-}
-function renderDep(){
-  let h=`<thead><tr><th>Poste</th><th style="width:110px">Catégorie</th><th style="width:160px">Depuis le compte</th><th style="width:110px">Part Alex %</th><th style="width:60px">Jour</th><th style="width:110px">Montant / mois</th><th></th></tr></thead><tbody>`;
-  S.depenses.forEach((d,i)=>{h+=`<tr><td>${txt(d.poste,`depenses.${i}.poste`)}</td><td>${catSelect(d.cat,`depenses.${i}.cat`)}</td>
-  <td>${acctSelect(d.compte,`depenses.${i}.compte`)}</td><td>${inp(partWd(d)*100,`depenses.${i}.partAlex|pct`,'edit')}</td>
-  <td>${inp(clampDay(d.jour,5),`depenses.${i}.jour`,'edit')}</td><td>${inp(d.montant,`depenses.${i}.montant`,d.edit?'edit':'')}</td><td><button class="btn del mini" onclick="delRow('depenses',${i})">✕</button></td></tr>`;});
-  const tot=S.depenses.reduce((a,d)=>a+num(d.montant),0);
-  h+=`</tbody><tfoot>
-  <tr><td colspan="5">TOTAL DÉPENSES / mois</td><td class="num" id="depTotal">${eur2.format(tot)}</td><td></td></tr>
-  <tr><td colspan="6" style="font-weight:normal;color:#555">réparti &nbsp; Alex : <b id="depAlex">${eur2.format(depShare('Alex'))}</b> &nbsp;·&nbsp; Charlie : <b id="depCharlie">${eur2.format(depShare('Charlie'))}</b> &nbsp;<span style="color:#98a2b3">(selon la part de chaque poste)</span></td><td></td></tr>
-  </tfoot>`;
-  document.getElementById('tblDep').innerHTML=h;
-}
-function renderVir(){
-  let h=`<thead><tr><th>Libellé</th><th style="width:180px">Du compte</th><th style="width:180px">Vers le compte</th><th style="width:70px">Jour</th><th style="width:120px">Montant / mois</th><th></th></tr></thead><tbody>`;
-  S.virements.forEach((t,i)=>{h+=`<tr><td>${txt(t.libelle,`virements.${i}.libelle`,'edit')}</td><td>${acctSelect(t.de,`virements.${i}.de`)}</td>
-  <td>${acctSelect(t.vers,`virements.${i}.vers`)}</td><td>${inp(clampDay(t.jour,28),`virements.${i}.jour`,'edit')}</td><td>${inp(t.montant,`virements.${i}.montant`,'edit')}</td>
-  <td><button class="btn del mini" onclick="delRow('virements',${i})">✕</button></td></tr>`;});
-  const tot=S.virements.reduce((a,t)=>a+num(t.montant),0);
-  h+=`</tbody><tfoot><tr><td colspan="4">TOTAL VIREMENTS / mois</td><td class="num" id="virTotal">${eur2.format(tot)}</td><td></td></tr></tfoot>`;
-  document.getElementById('tblVir').innerHTML=h;
-  renderRecon();
-}
-function renderRecon(){
-  const rec=jointRecon();
-  let tW=0,tH=0;
-  let r=`<h3>Répartition du compte joint · qui paie quoi (par poste)</h3>
-  <p class="hint" style="margin-top:0">Réglez la « Part Alex % » de chaque poste payé par le joint. L'outil compare la quote-part de chacun aux virements réellement effectués (1 950 € / 600 €).</p>
-  <div class="scrollx"><table><thead><tr><th>Poste payé par le joint</th><th class="num">Montant / mois</th><th style="width:150px">Part Alex (%)</th><th class="num">→ Alex</th><th class="num">→ Charlie</th></tr></thead><tbody>`;
-  rec.rows.forEach((row,k)=>{ const w=row.montant*row.pw, hh=row.montant*(1-row.pw); tW+=w; tH+=hh;
-    r+=`<tr><td>${row.label}</td><td class="num">${eur2.format(row.montant)}</td><td>${inp(row.pw*100,row.path,'edit')}</td>
-    <td class="num" id="reWi${k}">${eur2.format(w)}</td><td class="num" id="reHo${k}">${eur2.format(hh)}</td></tr>`; });
-  r+=`</tbody><tfoot><tr><td>TOTAL charges du joint</td><td class="num">${eur2.format(tW+tH)}</td><td></td><td class="num" id="recTotAlex">${eur2.format(tW)}</td><td class="num" id="recTotCharlie">${eur2.format(tH)}</td></tr></tfoot></table></div>
-  <p style="margin-top:12px">Virements entrants au joint &nbsp;·&nbsp; Alex : <b id="recContribAlex">${eur2.format(rec.contribAlex)}</b> &nbsp;·&nbsp; Charlie : <b id="recContribCharlie">${eur2.format(rec.contribCharlie)}</b><br>
-  <b>Écart</b> (ce qu'il vire − sa quote-part) &nbsp;·&nbsp; Alex : <b id="recEcartAlex" class="${Math.abs(rec.contribAlex-tW)<1?'pos':'neg'}">${eur2.format(rec.contribAlex-tW)}</b> &nbsp;·&nbsp; Charlie : <b id="recEcartCharlie" class="${Math.abs(rec.contribCharlie-tH)<1?'pos':'neg'}">${eur2.format(rec.contribCharlie-tH)}</b> &nbsp;<span style="color:#98a2b3">(0 = virements parfaitement calibrés)</span></p>`;
-  document.getElementById('reconCard').innerHTML=r;
-}
-function renderCpt(){
-  let h=`<thead><tr><th>Compte</th><th style="width:100px">Titulaire</th><th style="width:130px">Type</th><th style="width:150px">Solde actuel</th><th></th></tr></thead><tbody>`;
-  S.comptes.forEach((c,i)=>{h+=`<tr><td>${txt(c.nom,`comptes.${i}.nom`)}</td><td>${respSelect(c.titulaire,`comptes.${i}.titulaire`)}</td>
-  <td>${selOf([{v:'Courant',t:'Courant'},{v:'Épargne',t:'Épargne'},{v:'Placement',t:'Placement'}],c.type,`comptes.${i}.type`)}</td>
-  <td>${inp(c.solde,`comptes.${i}.solde`,'edit')}</td><td><button class="btn del mini" onclick="delRow('comptes',${i})">✕</button></td></tr>`;});
-  const tot=S.comptes.reduce((a,c)=>a+num(c.solde),0);
-  h+=`</tbody><tfoot><tr><td colspan="3">TOTAL DISPONIBLE</td><td class="num" id="cptTotal">${eur2.format(tot)}</td><td></td></tr></tfoot>`;
-  document.getElementById('tblCpt').innerHTML=h;
-}
-function renderPat(){
-  const P=S.patrimoine, ep=S.comptes.filter(c=>c.type!=='Courant').reduce((a,c)=>a+num(c.solde),0);
-  const actifs=num(P.immo)+num(P.vehicules)+num(P.autres)+ep, passifs=num(P.capitalDu)+num(P.autresDettes);
-  document.getElementById('tblPat').innerHTML=`<tbody>
-  <tr><td>Résidence principale</td><td>${inp(P.immo,'patrimoine.immo','edit')}</td></tr>
-  <tr><td>Épargne / placements (comptes)</td><td class="num" id="patEpargne" style="color:#008000">${eur0.format(ep)}</td></tr>
-  <tr><td>Véhicules</td><td>${inp(P.vehicules,'patrimoine.vehicules','edit')}</td></tr>
-  <tr><td>Autres placements (hors comptes)</td><td>${inp(P.autres,'patrimoine.autres','edit')}</td></tr>
-  <tr style="font-weight:bold;background:#E2EFDA"><td>Total actifs</td><td class="num" id="patActifs">${eur0.format(actifs)}</td></tr>
-  <tr><td>Capital restant dû (crédit)</td><td>${inp(P.capitalDu,'patrimoine.capitalDu','edit')}</td></tr>
-  <tr><td>Autres crédits / dettes</td><td>${inp(P.autresDettes,'patrimoine.autresDettes','edit')}</td></tr>
-  <tr style="font-weight:bold;background:#E2EFDA"><td>Total passifs</td><td class="num" id="patPassifs">${eur0.format(passifs)}</td></tr>
-  <tr style="font-weight:bold;background:#D9E1F2;font-size:15px"><td>PATRIMOINE NET</td><td class="num" id="patNet">${eur0.format(actifs-passifs)}</td></tr>
-  </tbody>`;
-  const mens=S.depenses.filter(d=>d.cat==='Logement').reduce((a,d)=>a+num(d.montant),0);
-  document.getElementById('tblCredit').innerHTML=`<tbody>
-  <tr><td>Taux d'intérêt annuel</td><td>${inp((num(P.tauxCredit)*100),'patrimoine.tauxCredit|pct','edit')} %</td></tr>
-  <tr><td>Mensualité (catégorie Logement)</td><td class="num" id="patMens" style="color:#008000">${eur2.format(mens)}</td></tr>
-  </tbody>`;
-}
-function renderProj(){
-  let h=`<thead><tr><th>Libellé</th><th style="width:100px">Catégorie</th><th style="width:60px">Mois</th><th style="width:55px">Jour</th><th style="width:110px">Montant</th><th style="width:170px">Payé depuis</th><th style="width:110px">Seuil</th><th></th></tr></thead><tbody>`;
-  S.projets.forEach((p,i)=>{const inc=RANK[S.scenario]>=+p.seuil;
-    h+=`<tr><td>${txt(p.libelle,`projets.${i}.libelle`,'edit')}</td><td>${catSelect(p.cat,`projets.${i}.cat`)}</td>
-    <td>${inp(p.mois,`projets.${i}.mois`,'edit')}</td><td>${inp(clampDay(p.jour,15),`projets.${i}.jour`,'edit')}</td><td>${inp(p.montant,`projets.${i}.montant`,'edit')}</td>
-    <td>${acctSelect(p.compte,`projets.${i}.compte`)}</td>
-    <td>${selOf([{v:'1',t:'1 · tous'},{v:'2',t:'2 · Réa+Opt'},{v:'3',t:'3 · Opt'}],''+p.seuil,`projets.${i}.seuil`)}</td>
-    <td>${inc?'<span class="pos">●</span>':'<span style="color:#ccc">○</span>'} <button class="btn del mini" onclick="delRow('projets',${i})">✕</button></td></tr>`;});
-  document.getElementById('tblProj').innerHTML=h+`</tbody>`;
-}
-function renderPrev(){
-  const c=compute(), R=c.rows, A=S.comptes;
-  let h=`<thead><tr><th>Mois</th>${A.map(a=>`<th class="num">${a.nom}</th>`).join('')}<th class="num">Patrimoine net</th></tr></thead><tbody>`;
-  R.forEach(r=>{h+=`<tr><td>${r.date.toLocaleDateString('fr-FR',{month:'short',year:'numeric'})}</td>
-  ${r.bal.map(b=>`<td>${money(b)}</td>`).join('')}<td>${money(r.patn)}</td></tr>`;});
-  document.getElementById('tblPrev').innerHTML=h+`</tbody>`;
-}
-function renderReve(){
-  const E=S.euromillions;
-  document.getElementById('euCag').value=E.cagnotte;
-  document.getElementById('euTaux').value=(E.taux*100);
-  const cag=num(E.cagnotte), sumPart=E.benef.reduce((a,b)=>a+num(b.part),0);
-  setPartInfo(sumPart);
-  let h=`<thead><tr><th>Bénéficiaire</th><th style="width:120px">Part (%)</th><th style="width:160px">Montant reçu</th><th>Rente annuelle</th><th>Rente mensuelle</th><th></th></tr></thead><tbody>`;
-  E.benef.forEach((b,i)=>{const mt=num(b.part)*cag, ra=mt*num(E.taux);
-    h+=`<tr><td>${txt(b.nom,`euromillions.benef.${i}.nom`,'edit')}</td><td>${inp(num(b.part)*100,`euromillions.benef.${i}.part|pct`,'edit')}</td>
-    <td class="num" id="reMt${i}">${money(mt)}</td><td id="reA${i}">${money(ra)}</td><td id="reM${i}">${money(ra/12)}</td>
-    <td><button class="btn del mini" onclick="delRow('euromillions.benef',${i})">✕</button></td></tr>`;});
-  const totMt=sumPart*cag, raT=totMt*num(E.taux);
-  h+=`</tbody><tfoot><tr><td>TOTAL RÉPARTI</td><td class="num" id="reveP">${pct(sumPart)}</td><td class="num" id="reveB">${eur0.format(totMt)}</td><td class="num" id="reveA">${eur0.format(raT)}</td><td class="num" id="reveM">${eur0.format(raT/12)}</td><td></td></tr></tfoot>`;
-  document.getElementById('tblReve').innerHTML=h;
-}
-function setPartInfo(sumPart){const el=document.getElementById('euEcart');if(!el)return;const ok=Math.abs(sumPart-1)<0.0001;
-  el.innerHTML=`Somme des parts : <span class="${ok?'pos':'neg'}">${pct(sumPart)}</span> ${ok?'✔':'(doit faire 100 %)'}`;}
-function onEu(){S.euromillions.cagnotte=num(document.getElementById('euCag').value);S.euromillions.taux=num(document.getElementById('euTaux').value)/100;save();updateLive();}
-
-/* ================= RECALCUL LIVE ================= */
-function setText(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
-function setHtml(id,h){const e=document.getElementById(id);if(e)e.innerHTML=h;}
-function updateLive(){
-  setText('revTotal',eur2.format(S.revenus.reduce((a,r)=>a+num(r.montant),0)));
-  setText('depTotal',eur2.format(S.depenses.reduce((a,d)=>a+num(d.montant),0)));
-  setText('depAlex',eur2.format(depShare('Alex')));setText('depCharlie',eur2.format(depShare('Charlie')));
-  { const rec=jointRecon(); let tW=0,tH=0;
-    rec.rows.forEach((row,k)=>{ const w=row.montant*row.pw, hh=row.montant*(1-row.pw); tW+=w; tH+=hh; setText('reWi'+k,eur2.format(w)); setText('reHo'+k,eur2.format(hh)); });
-    setText('recTotAlex',eur2.format(tW)); setText('recTotCharlie',eur2.format(tH));
-    setText('recContribAlex',eur2.format(rec.contribAlex)); setText('recContribCharlie',eur2.format(rec.contribCharlie));
-    const ew=rec.contribAlex-tW, eh=rec.contribCharlie-tH;
-    const elW=document.getElementById('recEcartAlex'); if(elW){elW.textContent=eur2.format(ew); elW.className=Math.abs(ew)<1?'pos':'neg';}
-    const elH=document.getElementById('recEcartCharlie'); if(elH){elH.textContent=eur2.format(eh); elH.className=Math.abs(eh)<1?'pos':'neg';} }
-  setText('virTotal',eur2.format(S.virements.reduce((a,t)=>a+num(t.montant),0)));
-  setText('cptTotal',eur2.format(S.comptes.reduce((a,c)=>a+num(c.solde),0)));
-  const P=S.patrimoine, ep=S.comptes.filter(c=>c.type!=='Courant').reduce((a,c)=>a+num(c.solde),0);
-  const actifs=num(P.immo)+num(P.vehicules)+num(P.autres)+ep, passifs=num(P.capitalDu)+num(P.autresDettes);
-  setText('patEpargne',eur0.format(ep));setText('patActifs',eur0.format(actifs));setText('patPassifs',eur0.format(passifs));setText('patNet',eur0.format(actifs-passifs));
-  setText('patMens',eur2.format(S.depenses.filter(d=>d.cat==='Logement').reduce((a,d)=>a+num(d.montant),0)));
-  const E=S.euromillions, cag=num(E.cagnotte), sumPart=E.benef.reduce((a,b)=>a+num(b.part),0);
-  E.benef.forEach((b,i)=>{const mt=num(b.part)*cag, ra=mt*num(E.taux);setHtml('reMt'+i,money(mt));setHtml('reA'+i,money(ra));setHtml('reM'+i,money(ra/12));});
-  const totMt=sumPart*cag, raT=totMt*num(E.taux);
-  setHtml('reveP',pct(sumPart));setHtml('reveB',eur0.format(totMt));setHtml('reveA',eur0.format(raT));setHtml('reveM',eur0.format(raT/12));setPartInfo(sumPart);
-  renderPrev(); renderDash();
-}
-function setPath(path,value){
-  let isPct=false; if(path.endsWith('|pct')){isPct=true;path=path.slice(0,-4);}
-  const parts=path.split('.'); let o=S; for(let i=0;i<parts.length-1;i++)o=o[parts[i]];
-  const k=parts[parts.length-1];
-  if(isPct||/montant|solde|mois|jour|immo|vehicules|autres|capitalDu|autresDettes|tauxCredit|cagnotte|taux|salGrowth|inflation|imprevus|epargne|rendement|revalImmo|part/.test(k)){
-    let v=num(value); if(isPct)v=v/100; o[k]=v;
-  } else o[k]=value;
-}
-document.addEventListener('input',e=>{const el=e.target; if(el.dataset&&el.dataset.path){setPath(el.dataset.path,el.value);save();updateLive();}});
-document.addEventListener('change',e=>{const el=e.target; if(el.tagName==='SELECT'&&el.dataset.path){setPath(el.dataset.path,el.value);save();renderAll();}});
-
-function delRow(coll,i){let arr=coll.split('.').reduce((o,k)=>o[k],S);arr.splice(i,1);save();renderAll();}
-function addRev(){S.revenus.push({source:'Nouveau revenu',benef:'Alex',compte:S.comptes[0]?.id,jour:28,montant:0,note:'',edit:true});save();renderRev();updateLive();}
-function addDep(){S.depenses.push({poste:'Nouvelle dépense',cat:'Divers',partAlex:0.5,compte:S.comptes[0]?.id,jour:5,montant:0,edit:true});save();renderDep();updateLive();}
-function addVir(){S.virements.push({libelle:'Nouveau virement',de:S.comptes[0]?.id,vers:S.comptes[2]?.id||S.comptes[0]?.id,jour:28,montant:0,partAlex:0.5});save();renderVir();updateLive();}
-function addCpt(){const id='c'+Date.now();S.comptes.push({id,nom:'Nouveau compte',titulaire:'Joint',type:'Courant',solde:0});save();renderCpt();updateLive();}
-function addProj(){S.projets.push({libelle:'Nouveau projet',cat:'Divers',mois:12,jour:15,montant:0,seuil:1,compte:S.comptes.find(c=>c.type!=='Courant')?.id||S.comptes[0]?.id});save();renderProj();updateLive();}
-function addBenef(){S.euromillions.benef.push({nom:'Nouveau',part:0});save();renderReve();}
-
-/* ================= NAVIGATION ================= */
-const TABS=[['dash','Tableau de bord'],['param','Paramètres'],['rev','Revenus'],['dep','Dépenses'],['cpt','Comptes'],['vir','Virements'],['pat','Patrimoine'],['proj','Projets'],['prev','Prévisions 36 mois'],['reve','Rêve EuroMillions']];
-function buildNav(){
-  document.getElementById('nav').innerHTML=TABS.map((t,i)=>`<button data-t="${t[0]}" class="${i===0?'active':''}">${t[1]}</button>`).join('');
-  document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
-    document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-    document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.dataset.p===b.dataset.t));renderAll();});
-}
-document.querySelectorAll('#segScen button').forEach(b=>b.onclick=()=>{S.scenario=b.dataset.s;save();renderAll();});
-function renderAll(){renderParam();renderRev();renderDep();renderVir();renderCpt();renderPat();renderProj();renderPrev();renderReve();renderDash();}
-load(); buildNav(); renderAll();
+refresh();
 </script>
 </body>
 </html>
